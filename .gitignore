@@ -28,6 +28,9 @@ go.work.sum
 # env file
 .env
 
+# MongoDB backup output (created by the app)
+backups/
+
 # Editor/IDE
 # .idea/
 # .vscode/

@@ -1,0 +1,16 @@
+I want to make a mongodb backup and restore utility in TUI.
+First page will accept the URI
+Second page will choose between backup and restore
+
+in backup
+third page will choose the database and the collections
+fourth page will show the progress 
+
+in restore
+third page will choose the backup location (default to ./backups)
+fourth page will show the database and collections to be restored
+fifth page will show the progress
+
+the backup location will be ./backups/<database-name>/<collection-name>.json
+
+mongodb+srv://userone:admin1234@clustermain.eumaatl.mongodb.net/
