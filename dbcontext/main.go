@@ -1,20 +1,28 @@
 package dbcontext
 
 import (
+	"context"
+
 	"go.mongodb.org/mongo-driver/v2/mongo"
 	"go.mongodb.org/mongo-driver/v2/mongo/options"
+	"go.mongodb.org/mongo-driver/v2/mongo/readpref"
 )
 
 var DB *mongo.Client
 
-func InitDB() *mongo.Client {
+func InitDB(uri string) (*mongo.Client, error) {
 	options := options.Client()
-	options.ApplyURI("mongodb://127.0.0.1:27017")
+	options.ApplyURI(uri)
 
 	client, err := mongo.Connect(options)
 	if err != nil {
-		panic(err)
+		return nil, err
+	} else {
+		if err = client.Ping(context.TODO(), readpref.Primary()); err != nil {
+			return nil, err
+		} else {
+			DB = client
+			return client, nil
+		}
 	}
-	DB = client
-	return client
 }

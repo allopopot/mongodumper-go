@@ -1,12 +1,17 @@
 package main
 
 import (
-	"context"
-	"mongodumpx/dbcontext"
+	"fmt"
+	"mongodumpx/views"
+	"os"
+
+	tea "charm.land/bubbletea/v2"
 )
 
 func main() {
-	client := dbcontext.InitDB()
-
-	client.Disconnect(context.TODO())
+	p := tea.NewProgram(views.InitializeModel())
+	if _, err := p.Run(); err != nil {
+		fmt.Printf("Alas, there's been an error: %v", err)
+		os.Exit(1)
+	}
 }
